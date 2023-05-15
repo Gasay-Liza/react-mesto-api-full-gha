@@ -1,0 +1,21 @@
+.profile{
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 30px;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 762px){
+  .profile{
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 38px 19px 0;
+  }
+}

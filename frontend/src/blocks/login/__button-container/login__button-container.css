@@ -1,0 +1,14 @@
+.login__button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    margin: 216px 0 0;
+}
+
+@media screen and (max-width: 540px){
+    .login__button-container{
+        margin: 173px 0 0;
+    }
+}

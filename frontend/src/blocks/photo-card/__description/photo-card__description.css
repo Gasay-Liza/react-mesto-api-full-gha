@@ -1,0 +1,14 @@
+.photo-card__description{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 79px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0;
+  background-color: #FFFFFF;
+  color: black;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

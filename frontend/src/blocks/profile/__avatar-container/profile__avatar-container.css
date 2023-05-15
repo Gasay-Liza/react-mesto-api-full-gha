@@ -1,0 +1,5 @@
+.profile__avatar-container{
+  display: flex;
+  max-height: 120px;
+  max-width: 120px;
+}

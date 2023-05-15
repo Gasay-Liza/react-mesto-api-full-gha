@@ -1,0 +1,21 @@
+.footer{
+  padding: 67px 0 60px;
+  color: #545454;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  line-height: 18px;
+  font-weight: 400;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+
+@media screen and (max-width: 544px){
+  .footer{
+    padding: 48px 19px 0;
+    font-size: 14px;
+    line-height: 14px;
+  }
+}

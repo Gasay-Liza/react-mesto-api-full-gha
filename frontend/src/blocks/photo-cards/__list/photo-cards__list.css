@@ -1,0 +1,20 @@
+.photo-cards__list{
+  display: grid;
+  justify-content: center;
+  margin: 51px 0 0;
+  padding: 0 0;
+  list-style-type: none;
+  width: 100%;
+  max-width: 880px;
+  box-sizing: border-box;
+  gap: 20px 17px;
+  grid-auto-rows: 361px;
+  grid-template-columns: repeat(auto-fit, minmax(262px, 282px));
+}
+
+@media screen and (max-width: 544px){
+  .photo-cards__list{
+    margin: 36px 0 0;
+  }
+}
+

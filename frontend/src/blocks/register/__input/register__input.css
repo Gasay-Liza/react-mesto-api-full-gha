@@ -1,0 +1,14 @@
+.register__input{
+    display: flex;
+    background-color: black;
+    color: white;
+    width: 100%;
+    border: 0;
+    max-height: 14px;
+    border-bottom: 2px solid #CCCCCC;
+    padding: 11px 0 11px;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 400;
+}
+

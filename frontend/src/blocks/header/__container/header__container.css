@@ -1,0 +1,17 @@
+.header__container{
+    display: flex;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 540px){
+    .header__container{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}

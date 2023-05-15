@@ -1,0 +1,16 @@
+.photo-card__trash{
+  position: absolute;
+  border: 0;
+  padding: 0 0;
+  width: 18px;
+  height: 19px;
+  right: 20px;
+  top: 20px;
+  background-image: url("../../../images/trashcan.svg");
+  background-color: transparent;
+}
+.photo-card__trash:hover{
+  background-image: url("../../../images/trash-hover.svg");
+  cursor: pointer;
+  transition: 0.3s ease;
+}

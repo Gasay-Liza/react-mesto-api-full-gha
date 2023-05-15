@@ -1,0 +1,7 @@
+.popup__container_type_tool-tip{
+    min-height: 330px;
+    padding: 60px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,12 @@
+.photo-card__likes-counter{
+  max-width: 40px;
+  margin: 3px 0 0;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

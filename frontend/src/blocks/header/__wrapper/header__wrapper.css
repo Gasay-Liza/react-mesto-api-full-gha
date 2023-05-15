@@ -1,0 +1,22 @@
+.header__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+}
+
+@media screen and (max-width: 540px){
+    .header__wrapper{
+        flex-direction: column;
+        font-style: normal;
+        align-items: center;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,7 @@
+.login__label{
+    box-sizing: border-box;
+}
+
+.login__label:last-of-type{
+    margin-top: 19px;
+}

@@ -1,0 +1,16 @@
+.photo-card__like{
+  box-sizing: border-box;
+  width: 22px;
+  height: 19px;
+  padding: 0 0;
+  border: none;
+  background: url("../../../images/like-button.svg");
+}
+
+.photo-card__like:hover{
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s ease;
+}
+
+

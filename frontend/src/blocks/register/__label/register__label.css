@@ -1,0 +1,7 @@
+.register__label{
+    box-sizing: border-box;
+}
+
+.register__label:last-of-type{
+    margin-top: 19px;
+}
