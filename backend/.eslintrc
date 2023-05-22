@@ -9,7 +9,6 @@
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "no-else-return": [2, { "allowElseIf": false }],
-    "max-classes-per-file": "off",
-    "quotes": ["error", "double, single", { "avoidEscape": true }]
+    "max-classes-per-file": "off"
   }
 }

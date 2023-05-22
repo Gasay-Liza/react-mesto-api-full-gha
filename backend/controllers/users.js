@@ -11,7 +11,8 @@ const {
 module.exports.getUsers = (req, res, next) => {
   // Возвращает всех пользователей
   User.find({})
-    .then((users) => res.send({ data: users }))
+    // .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -21,7 +22,7 @@ module.exports.getUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Пользователь по указанному _id не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -31,7 +32,7 @@ module.exports.getUserMe = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Пользователь не найден');
     })
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch(next);
 };
 
@@ -48,7 +49,7 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     })
-      .then((user) => res.status(201).send({ data: user }))
+      .then((user) => res.status(201).send(user))
       .catch((err) => {
         if (err.code === 11000) {
           return next(
@@ -85,6 +86,7 @@ module.exports.login = (req, res, next) => {
         // token - наш JWT токен, который мы отправляем
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
+        sameSite: true,
       });
       res.status(200).send({ message: 'Login succesful' });
     })
@@ -106,7 +108,7 @@ module.exports.updateUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Пользователь с указанным _id не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(
@@ -134,7 +136,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Пользователь с указанным _id не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(

@@ -39,12 +39,15 @@ function App() {
     const cbLogin = useCallback(async (email, password) => {
         try {
             const data = await auth.authorize(email, password)
-            if (data.token) {
-                setEmail(email);
-                localStorage.setItem('jwt', data.token);
-                setLoggedIn(true);
+            if (data.message) {
+                console.log('email', email);
+              setEmail(email);
+              setLoggedIn(true);
+              localStorage.setItem("authorized", "true");
+              navigate("/", { replace: true });
             }
-        } catch (err){
+        } catch (err) {
+            console.log(err);
             setInfoToolTipText(err)
             setIsSuccess(false);
             setIsInfoToolTipPopupOpen(true);
@@ -60,7 +63,8 @@ function App() {
             setIsInfoToolTipPopupOpen(true);
             navigate('/sign-in', {replace: true});
             setInfoToolTipText('Вы успешно зарегистрировались!')
-        } catch (err){
+        } catch (err) {
+            console.log(err)
             setInfoToolTipText(err)
             setIsSuccess(false);
             setIsInfoToolTipPopupOpen(true);
@@ -71,9 +75,8 @@ function App() {
 
     const cbTokenCheck = useCallback(async () => {
         try {
-            const jwt = localStorage.getItem('jwt');
-            const user = await auth.checkToken(jwt);
-            setEmail(user.data.email)
+            const authorized = localStorage.getItem("authorized");
+            await auth.checkToken(authorized);
             setLoggedIn(true);
         } catch (err){
             console.log(err)
@@ -82,14 +85,19 @@ function App() {
         }
     },[])
 
-    const cbLogOut = useCallback(() => {
+    
+    const cbLogOut = useCallback(async () => {
+        try {
+            await auth.signout();
             setLoggedIn(false);
-            setEmail('');
-            localStorage.removeItem('jwt')
-            navigate('/sign-in', {replace: true});
+            localStorage.removeItem("authorized");
+            navigate("/sign-in", { replace: true });
+        } catch (err) {
+            console.log(err);
+        }
     },[]);
-
-
+    
+    
     //При загрузке страницы получаем данные токена юзера
     React.useEffect(() => {
         cbTokenCheck();
@@ -102,6 +110,7 @@ function App() {
             .getUserInfo()
             .then(data => {
                 setCurrentUser(data);
+                setEmail(data.email);
             })
             .catch((err) => {
                 console.log(err);
@@ -109,7 +118,7 @@ function App() {
         api
             .getCards()
             .then(cards => {
-                setCards(cards);
+                setCards(cards.reverse());
             })
             .catch((err) => {
                 console.log(err);
@@ -211,7 +220,6 @@ function App() {
     function handleCardLike(card) {
         // Есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
-
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -236,79 +244,88 @@ function App() {
     }
 
     return (
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
+          <div className="page__container">
+            <Header
+              onLogOut={cbLogOut}
+              isLoggedIn={loggedIn}
+              userEmail={email}
+            />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRouteElement
+                    element={Main}
+                    loggedIn={loggedIn}
+                    cards={cards}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                  />
+                }
+              />
+              <Route
+                path="/sign-up"
+                element={
+                  <Register onRegister={cbRegister} isLoggedIn={loggedIn} />
+                }
+              />
+              <Route
+                path="/sign-in"
+                element={<Login onLogin={cbLogin} isLoggedIn={loggedIn} />}
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            <Footer />
 
-        <CurrentUserContext.Provider value={currentUser}>
-            <div className="page">
-                <div className="page__container">
+            {/*Форма редактирования профиля*/}
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+              isLoading={isLoading}
+            />
 
-                    <Header onLogOut={cbLogOut} isLoggedIn={loggedIn} userEmail={email}/>
-                    <Routes>
-                        <Route path="/" element={<ProtectedRouteElement
-                            element = {Main}
-                            loggedIn={loggedIn}
-                            cards={cards}
-                            onEditProfile={handleEditProfileClick}
-                            onAddPlace={handleAddPlaceClick}
-                            onEditAvatar={handleEditAvatarClick}
-                            onCardClick={handleCardClick}
-                            onCardLike={handleCardLike}
-                            onCardDelete={handleCardDelete}
-                        />}
-                        />
-                        <Route path="/sign-up" element={<Register onRegister={cbRegister} isLoggedIn={loggedIn}/>} />
-                        <Route path="/sign-in" element={<Login onLogin={cbLogin} isLoggedIn={loggedIn}/>} />
-                        <Route path="*" element={<Navigate to="/" replace />} />
-                    </Routes>
-                    <Footer/>
+            {/*Форма обновления аватара*/}
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+              isLoading={isLoading}
+            />
 
-                    {/*Форма редактирования профиля*/}
-                    <EditProfilePopup
-                        isOpen={isEditProfilePopupOpen}
-                        onClose={closeAllPopups}
-                        onUpdateUser={handleUpdateUser}
-                        isLoading={isLoading}
-                    />
+            {/*Форма обновления карточек*/}
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPlace={handleUpdateCards}
+              isLoading={isLoading}
+            />
 
-                    {/*Форма обновления аватара*/}
-                    <EditAvatarPopup
-                        isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                        onUpdateAvatar={handleUpdateAvatar}
-                        isLoading={isLoading}
-                    />
+            {/*Форма согласия*/}
+            <PopupWithForm
+              name={"confirm"}
+              title={"Вы уверены?"}
+              buttonText={"Да"}
+              // isOpen={isConfirmPopupOpen}
+            ></PopupWithForm>
 
-                    {/*Форма обновления карточек*/}
-                    <AddPlacePopup
-                        isOpen={isAddPlacePopupOpen}
-                        onClose={closeAllPopups}
-                        onAddPlace={handleUpdateCards}
-                        isLoading={isLoading}
-                    />
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-                    {/*Форма согласия*/}
-                    <PopupWithForm
-                        name={'confirm'}
-                        title={'Вы уверены?'}
-                        buttonText={'Да'}
-                        // isOpen={isConfirmPopupOpen}
-                    >
-                    </PopupWithForm>
-
-                    <ImagePopup
-                        card={selectedCard}
-                        onClose={closeAllPopups}
-                    />
-
-                    <InfoToolTip
-                        isOpen={isInfoToolTipPopupOpen}
-                        isSuccess={isSuccess}
-                        onClose={closeAllPopups}
-                        infoToolTipText={infoToolTipText}
-                    />
-
-                </div>
-            </div>
-        </CurrentUserContext.Provider>
+            <InfoToolTip
+              isOpen={isInfoToolTipPopupOpen}
+              isSuccess={isSuccess}
+              onClose={closeAllPopups}
+              infoToolTipText={infoToolTipText}
+            />
+          </div>
+        </div>
+      </CurrentUserContext.Provider>
     );
 }
 
