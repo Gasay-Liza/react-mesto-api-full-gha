@@ -40,7 +40,7 @@ class Api {
   deleteCard(id) {
     return this._request(`${this._baseUrl}/cards/` + id, {
       credentials: this._credentials,
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     });
   }
@@ -48,7 +48,7 @@ class Api {
   // Загрузка карточки на сервер
   createCard(data) {
     return this._request(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       credentials: this._credentials,
       body: JSON.stringify({
@@ -61,7 +61,7 @@ class Api {
   // Загрузка информации профиля на сервер
   setUserInfo(data) {
     return this._request(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       credentials: this._credentials,
       headers: this._headers,
       body: JSON.stringify({
@@ -74,7 +74,7 @@ class Api {
   // Загрузка лайка карточки на сервер
   setLike(id) {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "PUT",
+      method: 'PUT',
       credentials: this._credentials,
       headers: this._headers,
     });
@@ -83,7 +83,7 @@ class Api {
   // Удаление лайка карточки с сервера
   deleteLike(id) {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
+      method: 'DELETE',
       credentials: this._credentials,
       headers: this._headers,
     });
@@ -92,7 +92,7 @@ class Api {
   // Редактирование профиля
   setUserAvatar(data) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       credentials: this._credentials,
       body: JSON.stringify({
@@ -111,11 +111,11 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:3000",
+  baseUrl: 'https://api.gasayliza.nomoredomains.monster',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
-  credentials: "include",
+  credentials: 'include',
 });
 
 export default api;

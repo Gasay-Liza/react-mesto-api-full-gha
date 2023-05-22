@@ -1,6 +1,8 @@
 const allowedCors = [
   'http://localhost:3000',
   'http://gasayliza.nomoredomains.monster',
+  'https://gasayliza.nomoredomains.monster',
+  'http://api.gasayliza.nomoredomains.monster',
   'https://api.gasayliza.nomoredomains.monster',
   'http://localhost:3000',
   'https://localhost:3000',
