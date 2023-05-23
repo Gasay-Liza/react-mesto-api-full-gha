@@ -23,7 +23,7 @@ class Api {
   // Получение карточек с сервера
   getCards() {
     return this._request(`${this._baseUrl}/cards`, {
-      credentials: this._credentials,
+      credentials: 'include',
       headers: this._headers,
     });
   }
@@ -31,7 +31,7 @@ class Api {
   // Получение данных профиля с сервера
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
-      credentials: this._credentials,
+      credentials: 'include',
       headers: this._headers,
     });
   }
@@ -39,7 +39,7 @@ class Api {
   // Удаление карточки
   deleteCard(id) {
     return this._request(`${this._baseUrl}/cards/` + id, {
-      credentials: this._credentials,
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers,
     });
@@ -48,9 +48,9 @@ class Api {
   // Загрузка карточки на сервер
   createCard(data) {
     return this._request(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
-      credentials: this._credentials,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -61,8 +61,8 @@ class Api {
   // Загрузка информации профиля на сервер
   setUserInfo(data) {
     return this._request(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
-      credentials: this._credentials,
       headers: this._headers,
       body: JSON.stringify({
         name: data.username,
@@ -74,8 +74,8 @@ class Api {
   // Загрузка лайка карточки на сервер
   setLike(id) {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
+      credentials: 'include',
       method: 'PUT',
-      credentials: this._credentials,
       headers: this._headers,
     });
   }
@@ -83,8 +83,8 @@ class Api {
   // Удаление лайка карточки с сервера
   deleteLike(id) {
     return this._request(`${this._baseUrl}/cards/${id}/likes`, {
+      credentials: 'include',
       method: 'DELETE',
-      credentials: this._credentials,
       headers: this._headers,
     });
   }
@@ -92,9 +92,9 @@ class Api {
   // Редактирование профиля
   setUserAvatar(data) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
-      credentials: this._credentials,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
