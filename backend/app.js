@@ -8,7 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
 const app = express();
-app.options("*", cors());
+
 require('dotenv').config();
 
 const { router } = require('./routes/index');
