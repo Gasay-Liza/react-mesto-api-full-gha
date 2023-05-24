@@ -7,6 +7,13 @@ const { linkRegex } = require('../utils/constans');
 const { NotFoundError } = require('../errors/index');
 const { createUser, login } = require('../controllers/users');
 
+// Краш-тест сервера
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.post(
   '/signup',
   celebrate({
