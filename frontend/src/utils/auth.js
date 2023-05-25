@@ -10,6 +10,7 @@ function getResponse(res) {
   return res.json();
 }
 
+//Регистрация
 export const register = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {
       method: "POST",
@@ -24,6 +25,7 @@ export const register = (email, password) => {
     }).then(getResponse);
 }
 
+//Авторизация
 export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
       method: "POST",
@@ -39,6 +41,7 @@ export const authorize = (email, password) => {
     }).then(getResponse);
 }
 
+//Выход из аккаунта
 export const signout = () => {
   return fetch(`${BASE_URL}/signout`, {
     method: "GET",
@@ -50,6 +53,7 @@ export const signout = () => {
   }).then(getResponse);
 };
 
+//Проверка токена(данных, полученных с профиля)
 export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
       method: "GET",

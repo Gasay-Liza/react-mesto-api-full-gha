@@ -101,6 +101,7 @@ class Api {
     });
   }
 
+  // Удаление или постановка лайка
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
       return this.deleteLike(cardId);
