@@ -112,7 +112,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.gasayliza.nomoredomains.monster',
+  baseUrl: 'https://api.gasayliza.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
   },
