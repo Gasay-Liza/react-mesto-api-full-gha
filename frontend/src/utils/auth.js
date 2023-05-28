@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.gasayliza.nomoredomains.monster";
+export const BASE_URL = "//api.gasayliza.nomoredomains.monster";
 
 function getResponse(res) {
   if (!res.ok) {
