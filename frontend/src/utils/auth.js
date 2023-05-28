@@ -1,5 +1,5 @@
 export const BASE_URL = "//api.gasayliza.nomoredomains.monster";
-
+//если коммита нет, то данные не грузятся
 function getResponse(res) {
   if (!res.ok) {
       
