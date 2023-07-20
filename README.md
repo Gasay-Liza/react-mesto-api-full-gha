@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.18.216
+IP-адрес 158.160.25.243
 
 Frontend https://gasayliza.nomoredomains.monster
 

@@ -19,7 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 
 app.use(cors);
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3005 } = process.env;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
